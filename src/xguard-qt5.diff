@@ -1,0 +1,58 @@
+diff --git a/src/xguard.h b/src/xguard.h
+index 0a054cd..7c0300e 100644
+--- a/src/xguard.h
++++ b/src/xguard.h
+@@ -18,28 +18,29 @@
+ #ifndef XGUARD_H_
+ #define XGUARD_H_
+ 
++#include <QtCore/QtGlobal>
+ #include <functional>
+ 
+ template<typename Function>
+ class XGuard {
+ public:
+-	XGuard(const Function& aFunction) noexcept : m_fSucceeded(false), m_Function(aFunction)
++	XGuard(const Function& aFunction) Q_DECL_NOEXCEPT : m_fSucceeded(false), m_Function(aFunction)
+ 	{
+ 	}
+ 
+-	~XGuard(void) noexcept
++	~XGuard(void) Q_DECL_NOEXCEPT
+ 	{
+ 		if (!this->m_fSucceeded) {
+ 			this->m_Function();
+ 		}
+ 	}
+ 
+-	XGuard(XGuard&& other) noexcept : m_fSucceeded(std::move(other.m_fSucceeded)), m_Function(std::move(other.m_Function))
++	XGuard(XGuard&& other) Q_DECL_NOEXCEPT : m_fSucceeded(std::move(other.m_fSucceeded)), m_Function(std::move(other.m_Function))
+ 	{
+ 		other.commit();
+ 	}
+ 
+-	XGuard& operator=(XGuard&& rhs) noexcept
++	XGuard& operator=(XGuard&& rhs) Q_DECL_NOEXCEPT
+ 	{
+ 		if (this != &rhs) {
+ 			this->m_fSucceeded = std::move(rhs.m_fSucceeded);
+@@ -50,7 +51,7 @@ public:
+ 		return *this;
+ 	}
+ 
+-	void commit(void) const noexcept
++	void commit(void) const Q_DECL_NOEXCEPT
+ 	{
+ 		this->m_fSucceeded = true;
+ 	}
+@@ -59,8 +60,8 @@ private:
+ 	mutable bool m_fSucceeded;
+ 	Function m_Function;
+ 
+-	XGuard(const XGuard&) = delete;
+-	XGuard& operator=(const XGuard&) = delete;
++	XGuard(const XGuard&) Q_DECL_EQ_DELETE;
++	XGuard& operator=(const XGuard&) Q_DECL_EQ_DELETE;
+ };
+ 
+ template<typename F, typename... A>
