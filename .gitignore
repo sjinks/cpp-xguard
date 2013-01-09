@@ -1,4 +1,4 @@
 *.o
 *.d
-/tests/runner.coo
+/tests/runner.cpp
 /tests/runner
