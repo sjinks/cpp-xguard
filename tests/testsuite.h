@@ -9,6 +9,7 @@ int g_rollback_commit_v = 0;
 
 class XGuardTestSuite : public CxxTest::TestSuite {
 public:
+	XGuardTestSuite(void) : m_var(0) {}
 
 	void testBasicRollbackCommit1(void)
 	{
@@ -173,7 +174,7 @@ public:
 	}
 
 private:
-	int m_var = 0;
+	int m_var;
 
 	static void static_reset_rollback_commit_v(void)
 	{
