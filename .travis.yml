@@ -4,6 +4,8 @@ compiler:
   - gcc
   - clang
 
+sudo: false
+
 script:
   - cd tests
   - git clone https://github.com/CxxTest/cxxtest.git cxxtest-ro
