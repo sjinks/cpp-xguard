@@ -2,3 +2,5 @@
 *.d
 /tests/runner.cpp
 /tests/runner
+/tests/cxxtest
+/tests/cxxtest-ro
