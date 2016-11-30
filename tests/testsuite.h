@@ -1,7 +1,6 @@
 #ifndef XGUARD_TESTSUITE_H
 #define XGUARD_TESTSUITE_H
 
-#include <iostream>
 #include <cxxtest/TestSuite.h>
 #include "../src/xguard.h"
 
@@ -119,11 +118,12 @@ public:
 			TS_ASSERT(Test::value > 0); // == 2
 			TS_ASSERT_EQUALS(Test::value, 2);
 			n = Test::value;
-//			std::cout << n << std::endl;
+			// With g++ 4.7, when the guard goes out of scope, the copy constructor is called twice
+			// With g++ 4.8+, the copy constructor is called only once
 		}
 
-		TS_ASSERT(Test::value >= n); // == 4
-		TS_ASSERT_EQUALS(Test::value, 4);
+		TS_ASSERT(Test::value >= n);
+//		TS_ASSERT_EQUALS(Test::value, 4); // g++ 4.7: 4, g++ 4.8+: 3
 		TS_ASSERT_EQUALS(x.x, 4);
 
 		x.x         = 4;
@@ -135,8 +135,8 @@ public:
 			TS_ASSERT_EQUALS(Test::value, 0);
 		}
 
-		TS_ASSERT(Test::value >= 1); // == 2
-		TS_ASSERT_EQUALS(Test::value, 2); // == 2
+		TS_ASSERT(Test::value >= 1);
+//		TS_ASSERT_EQUALS(Test::value, 2); // g++ 4.7: 2, g++ 4.8+: 1
 		TS_ASSERT_EQUALS(x.x, 4);
 
 		x.x         = 4;
@@ -148,8 +148,8 @@ public:
 			TS_ASSERT_EQUALS(Test::value, 0);
 		}
 
-		TS_ASSERT(Test::value >= 1); // == 2
-		TS_ASSERT_EQUALS(Test::value, 2); // == 2
+		TS_ASSERT(Test::value >= 1);
+//		TS_ASSERT_EQUALS(Test::value, 2); // g++ 4.7: 2, g++ 4.8+: 1
 		TS_ASSERT_EQUALS(x.x, 4);
 
 		x.x         = 4;
