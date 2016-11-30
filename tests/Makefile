@@ -2,7 +2,7 @@ all: runner
 test: runner
 	./runner -v
 
-CXXFLAGS += -std=c++11 -I.
+CXXFLAGS += -std=c++0x -I.
 
 CXX_SRC  = runner.cpp
 CXX_DEPS = $(patsubst %.cpp,%.d,$(CXX_SRC))
