@@ -4,11 +4,15 @@ compiler:
   - gcc
   - clang
 
-sudo: false
+sudo: required
+dist: trusty
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get -qq -y install cxxtest
 
 script:
-  - cd tests
-  - git clone https://github.com/CxxTest/cxxtest.git cxxtest-ro
-  - export PATH="$PATH:$(pwd)/cxxtest-ro/bin"
-  - ln -s cxxtest-ro/cxxtest cxxtest
-  - make && make test
+  - make CXXFLAGS="--coverage" LDFLAGS="--coverage" -C tests && make -C tests test
+
+after_success:
+  - ./.travis/after_success.sh

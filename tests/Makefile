@@ -2,8 +2,6 @@ all: runner
 test: runner
 	./runner -v
 
-CXXFLAGS += -std=c++0x -I.
-
 CXX_SRC  = runner.cpp
 CXX_DEPS = $(patsubst %.cpp,%.d,$(CXX_SRC))
 
@@ -28,6 +26,6 @@ clean:
 	rm -f runner runner.cpp runner.o runner.d
 
 %.o: %.cpp
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c "$<" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@"
+	$(CXX) $(CPPFLAGS) -std=c++0x $(CXXFLAGS) -c "$<" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@"
 
 .PHONY: clean

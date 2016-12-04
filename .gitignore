@@ -1,5 +1,8 @@
 *.o
 *.d
+*.gcda
+*.gcno
+*.gcov
 /tests/runner.cpp
 /tests/runner
 /tests/cxxtest
