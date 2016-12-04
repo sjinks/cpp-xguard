@@ -8,5 +8,5 @@ else
 	ARGS=gcov
 fi
 
-(cd tests && $GCOV $ARGS *.c && /bin/bash <(curl -s https://codecov.io/bash) -X gcov)
+(cd tests && $GCOV $ARGS *.cpp && /bin/bash <(curl -s https://codecov.io/bash) -X gcov -s .)
 
