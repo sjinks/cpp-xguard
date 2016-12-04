@@ -2,4 +2,4 @@
 
 Scope Guard Idiom Implementation in C++11
 
-See `(tests/testsuite.h)[https://github.com/sjinks/cpp-xguard/blob/master/tests/testsuite.h]` for usage examples.
+See (tests/testsuite.h)[https://github.com/sjinks/cpp-xguard/blob/master/tests/testsuite.h] for usage examples.
